@@ -26,7 +26,6 @@ function Touch() {
     Object.preventExtensions(this);
 }
 
-
 exports.collections = {
     touchs : touchs
 };

@@ -41,7 +41,7 @@ function postNewTouch(req, res, next) {
 
     touchs.save(touch, function (err, success) {
         console.log("Response success " + success);
-        console.log("Response error ", +err);
+        console.log("Response error " + err);
 
         if (success) {
             res.send(201, touch);
@@ -53,6 +53,6 @@ function postNewTouch(req, res, next) {
 }
 
 exports.services = {
-    findAllTouchs : findAllTouchs,
-    postNewTouch : postNewTouch
+    findAllTouchs: findAllTouchs,
+    postNewTouch: postNewTouch
 };
