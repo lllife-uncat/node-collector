@@ -28,22 +28,48 @@ server.listen(port, ipAddress, function () {
     console.log("%s listening at %s ", server.name, server.url);
 });
 
-// touch list service
-// * path: /touchs
-// * method: get
-// * hander: findAllTouchs
-server.get({
-        path: configs.touchsPath,
-        version: '0.0.1'
-    }, services.findAllTouchs
-)
 
 // add touch service
 // * path: /touchs
 // * method: post
 // * hander: postNewToush
 server.post({
-        path: configs.touchsPath,
+        path: "/touchs",
         version: '0.0.1'
     }, services.postNewTouch
 );
+
+// touch list service
+// * path: /touchs
+// * method: get
+// * hander: findAllTouchs
+server.get({
+        path: "/touchs" ,
+        version: '0.0.1'
+    }, services.findAllTouchs
+)
+
+server.post({
+		path : "/touchs/query",
+		version : "0.0.1"
+	}, services.queryTouchs
+);
+
+server.post({
+    path : "/pirs/query",
+    version : "0.0.1"
+}, services.queryPIRs);
+
+
+server.post({
+        path : "/pirs",
+        version : '0.0.1'
+    }, services.postNewPIR
+);
+
+server.get({
+        path: "/pirs",
+        version: '0.0.1'
+    }, services.findAllPIRs
+)
+

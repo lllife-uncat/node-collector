@@ -10,6 +10,7 @@ var configs = require("./settings").configs;
 var connectionString = configs.connectionString;
 var db = mongojs(connectionString, ["collector"])
 var touchs = db.collection("touchs");
+var pirs =db.collection("pirs");
 
 function Base() {
     this.collectDate = new Date();
@@ -26,9 +27,20 @@ function Touch() {
     Object.preventExtensions(this);
 }
 
+function PIR() {
+	this.enterDate = null;
+	this.leaveDate = null;
+	this.deviceId = null;
+
+	Base.apply(this, arguments);
+	Object.preventExtensions(this);
+}
+
 exports.collections = {
-    touchs : touchs
+    touchs : touchs,
+    pirs : pirs
 };
 
 exports.Touch= Touch;
+exports.PIR = PIR
 
