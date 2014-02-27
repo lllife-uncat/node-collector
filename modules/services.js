@@ -2,6 +2,10 @@ var models = require("./models");
 var touchs = models.collections.touchs;
 var pirs = models.collections.pirs;
 
+var mongojs = require('mongojs');
+var ObjectId = mongojs.ObjectId;
+
+
 // append header
 // * allow: *
 function setHeader(res) {
@@ -28,18 +32,24 @@ function findAllTouchs(req, res, next) {
 }
 
 function queryPIRs(req, res, next){
-    var jsonDate = req.params.enterDate;
+
+    var jsonDate = req.params.collectDate;
+    var id = req.params.id || "000000000000000000000000"
+
+    log(jsonDate);
+    log(id)
+
     if(jsonDate){
 
-        console.log("params: " + jsonDate);
-        var enterDate = new Date(jsonDate);
+        var date = new Date(jsonDate);
 
-        console.log(enterDate.toString());
-
-        var query = { enterDate : { $gt : enterDate } };
+        var query = { _id : { $gt : new ObjectId(id) } };
         pirs.find(query).limit(10).skip(0 , function(err, success){
             if(success) {
-                console.log("success");
+
+                success.forEach(function(c){
+                    console.log(c._id);
+                });    
 
                 res.send(200, success);
                 return next();
@@ -49,23 +59,38 @@ function queryPIRs(req, res, next){
                 return next(err);
             }
         });
+    } else {
+        res.send(200, []);
+        return next();
+    }
+}
+
+function log(name, value) {
+    if(!value) {
+        console.log(">> " + name)        
+    }else {
+        console.log(name + " >> " + value);
     }
 }
 
 function queryTouchs(req, res, next){
 
-    var jsonDate = req.params.touchDate;
+    var jsonDate = req.params.collectDate;
+    var id = req.params.id || "000000000000000000000000"
+
+    log(jsonDate);
+    log(id)
     
     if(jsonDate) {
         
-        console.log("params: " + jsonDate);
-        var touchDate = new Date(jsonDate);
+        var date = new Date(jsonDate);
 
-        console.log(touchDate.toString());
-
-        touchs.find({ touchDate : { $gt: touchDate }}).limit(10).skip( 0, function(err, success){
-            if(success) {
-                console.log(success);
+        touchs.find({ _id : { $gt: new ObjectId(id) }}).limit(10).skip( 0, function(err, success){
+            if(success) {   
+                
+                success.forEach(function(c){
+                    console.log(c._id);
+                });
 
                 res.send(200, success)
                 return next();
