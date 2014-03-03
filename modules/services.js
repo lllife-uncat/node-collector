@@ -44,7 +44,7 @@ function queryPIRs(req, res, next){
         var date = new Date(jsonDate);
 
         var query = { _id : { $gt : new ObjectId(id) } };
-        pirs.find(query).limit(5).skip(0 , function(err, success){
+        pirs.find(query).limit(50).skip(0 , function(err, success){
             if(success) {
 
                 success.forEach(function(c){
@@ -85,7 +85,7 @@ function queryTouchs(req, res, next){
 
         var date = new Date(jsonDate);
 
-        touchs.find({ _id : { $gt: new ObjectId(id) }}).limit(5).skip( 0, function(err, success){
+        touchs.find({ _id : { $gt: new ObjectId(id) }}).limit(50).skip( 0, function(err, success){
             if(success) {
 
                 success.forEach(function(c){
