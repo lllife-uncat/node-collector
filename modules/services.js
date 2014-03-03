@@ -44,12 +44,12 @@ function queryPIRs(req, res, next){
         var date = new Date(jsonDate);
 
         var query = { _id : { $gt : new ObjectId(id) } };
-        pirs.find(query).limit(10).skip(0 , function(err, success){
+        pirs.find(query).limit(5).skip(0 , function(err, success){
             if(success) {
 
                 success.forEach(function(c){
                     console.log(c._id);
-                });    
+                });
 
                 res.send(200, success);
                 return next();
@@ -67,7 +67,7 @@ function queryPIRs(req, res, next){
 
 function log(name, value) {
     if(!value) {
-        console.log(">> " + name)        
+        console.log(">> " + name)
     }else {
         console.log(name + " >> " + value);
     }
@@ -80,14 +80,14 @@ function queryTouchs(req, res, next){
 
     log(jsonDate);
     log(id)
-    
+
     if(jsonDate) {
-        
+
         var date = new Date(jsonDate);
 
-        touchs.find({ _id : { $gt: new ObjectId(id) }}).limit(10).skip( 0, function(err, success){
-            if(success) {   
-                
+        touchs.find({ _id : { $gt: new ObjectId(id) }}).limit(5).skip( 0, function(err, success){
+            if(success) {
+
                 success.forEach(function(c){
                     console.log(c._id);
                 });
