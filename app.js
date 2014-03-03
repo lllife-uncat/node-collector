@@ -1,3 +1,5 @@
+#!/bin/env node
+
 // load modules
 var restify = require('restify');
 var services = require("./modules/services").services;
