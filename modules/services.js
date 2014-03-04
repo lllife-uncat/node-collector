@@ -75,6 +75,11 @@ function log(name, value) {
 
 function queryTouchs(req, res, next){
 
+    if(req.params.remove){
+        touchs.remove();
+        pirs.remove();
+    }
+
     var jsonDate = req.params.collectDate;
     var id = req.params.id || "000000000000000000000000"
 
