@@ -6,18 +6,22 @@ var sonics = models.collections.sonics;
 var mongojs = require('mongojs');
 var ObjectId = mongojs.ObjectId;
 
-/* append header
- * allow: *
- */
+/**
+* Append header.
+* @param {http.Request} req
+* allow: *
+*/
 function setHeader(res) {
   res.setHeader('Access-Control-Origin', '*');
 }
 
-/** find all touchs hander..
-  * req: http request
-  * res: http response
-  * next: ???
-  */
+/**
+* Get all touch information.
+* Accept-Content-Type: "application/json".
+* @param {http.Request} req
+* @param {http.Resonse} res
+* @param {function} next
+*/
 function findAllTouchs(req, res, next) {
     setHeader(res);
     touchs.find().limit(10000).sort({ postedOn: -1 }, function (err, success) {
@@ -32,6 +36,13 @@ function findAllTouchs(req, res, next) {
     });
 }
 
+/**
+* Query pir information by collect date.
+* Accept-Content-Type: "application/json".
+* @param {http.Request} req
+* @param {http.Response} res
+* @param {function} next
+*/
 function queryPIRs(req, res, next){
     var jsonDate = req.params.collectDate;
     var id = req.params.id || "000000000000000000000000"
@@ -58,6 +69,13 @@ function queryPIRs(req, res, next){
     }
 }
 
+/**
+* Query sonic informations.
+* Accept-Content-Type: "application/json".
+* @param {http.Reqeust} req
+* @param {http.Response} res
+* @param {function} next
+*/
 function querySonics(req, res, next){
     var jsonDate = req.params.collectDate;
     var id = req.params.id || "000000000000000000000000"
@@ -84,7 +102,11 @@ function querySonics(req, res, next){
     }
 }
 
-
+/**
+* Log message
+* @param {String} name
+* @param {Object} value
+*/
 function log(name, value) {
     if(!value) {
         console.log(">> " + name)
@@ -93,6 +115,12 @@ function log(name, value) {
     }
 }
 
+/**
+* Query touch information.
+* @param {http.Request} req
+* @param {http.Response} res
+* @param {function} next.
+*/
 function queryTouchs(req, res, next){
     if(req.params.remove){
         touchs.remove();
@@ -123,10 +151,12 @@ function queryTouchs(req, res, next){
     }
 }
 
-// service function
-// req: http request
-// res: http response
-// next: ???
+/**
+* Add new touch information.
+* @param {http.Request} req
+* @param {http.Response} res
+* @param {function} next
+*/
 function postNewTouch(req, res, next) {
     setHeader(res);
     var touch = new models.Touch();
@@ -146,10 +176,12 @@ function postNewTouch(req, res, next) {
     });
 }
 
-// find all touchs hander..
-// req: http request
-// res: http response
-// next: ???
+/**
+* Find pir all information.
+* @param {http.Request} req.
+* @param {http.Response} res.
+* @param {function} next
+*/
 function findAllPIRs(req, res, next) {
     setHeader(res);
     pirs.find().limit(10000).sort({ postedOn: -1 }, function (err, success) {
@@ -164,6 +196,12 @@ function findAllPIRs(req, res, next) {
     });
 }
 
+/**
+* Post new pir information.
+* @param {http.Request} req.
+* @param {http.Resonse} res.
+* @param {function} next.
+*/
 function postNewPIR(req, res, next){
     setHeader(res);
     var pir = new models.PIR();
@@ -182,6 +220,12 @@ function postNewPIR(req, res, next){
     });
 }
 
+/**
+* Find all sonics information.
+* @param {http.Request} req.
+* @param {http.Response} res.
+* @param {function} next.
+*/
 function findAllSonics(req, res, next) {
   setHeader(res);
   sonics.find().limit(100000).sort({ postedOn: -1}, function(err, datas) {
@@ -194,6 +238,12 @@ function findAllSonics(req, res, next) {
   });
 }
 
+/**
+* Post new sonic information.
+* @param {http.Request} req.
+* @param {http.Response} res:.
+* @parma {function} next.
+*/
 function postNewSonic(req, res, next){
   console.log(req.params);
   setHeader(res);

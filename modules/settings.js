@@ -1,4 +1,3 @@
-
 var dev = {
     connectionString : "localhost:27017/collector",
     ipAddress: "0.0.0.0",

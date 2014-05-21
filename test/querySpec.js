@@ -3,10 +3,15 @@ var http = require("http");
 
 describe("[Sonic]", function(){
 
+  var production = true;
   var host = "10.0.0.77";
   var port = 8080;
-  var headers =  { "Content-Type" : "application/json" }
+  var headers =  { "Content-Type" : "application/json" };
 
+  if(production) {
+    host = "collector-pacific.rhcloud.com";
+    port = 80
+  }
 
   it("Query by example success", function(done){
     var options = {
