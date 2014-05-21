@@ -5,6 +5,9 @@ var restify = require('restify');
 var services = require("./modules/services").services;
 var configs = require("./modules/settings").configs;
 
+/**
+* Create node server.
+*/
 function createServer() {
   // config server
   // * bind = 0.0.0.0 (can access from all host)
@@ -31,6 +34,11 @@ function createServer() {
   return server;
 }
 
+/**
+* Register sonic service.
+* @param {Server} server
+* @param {module.services} services.
+*/
 function registerSonics(server, services){
   server.post({
     path: "/sonics",
@@ -46,6 +54,11 @@ function registerSonics(server, services){
   }, services.querySonics);
 }
 
+/**
+* Register touch service.
+* @param {Server} server.
+* @param {module.services} services.
+*/
 function registerTouchs(server, services) {
   server.post({
     path: "/touchs",
@@ -63,6 +76,11 @@ function registerTouchs(server, services) {
   }, services.queryTouchs);
 }
 
+/**
+* Regiser pirs services.
+* @param {Server} server.
+* @param {modules.services}
+*/
 function registerPIRs(server, services) {
   server.post({
     path : "/pirs/query",
@@ -80,6 +98,9 @@ function registerPIRs(server, services) {
   }, services.findAllPIRs);
 }
 
+/**
+* Register all services then start server.
+*/
 function startNow() {
   var server = createServer();
   registerTouchs(server, services);
@@ -87,4 +108,5 @@ function startNow() {
   registerSonics(server, services);
 }
 
+// Start node server...
 startNow();

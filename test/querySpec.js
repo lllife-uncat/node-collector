@@ -1,8 +1,17 @@
 var expect = require("chai").expect;
 var http = require("http");
 
+/**
+* Test sonic service with mocha.
+* Run: 'mocha' in project directory.
+*/
 describe("[Sonic]", function(){
 
+  // Default parameter.
+  // * Is production
+  // * host
+  // * port
+  // * headers
   var production = true;
   var host = "10.0.0.77";
   var port = 8080;
@@ -13,6 +22,10 @@ describe("[Sonic]", function(){
     port = 80
   }
 
+  /**
+  * Test query sonic by example.
+  * Use collection date as condition.
+  */
   it("Query by example success", function(done){
     var options = {
       host: host,
@@ -40,6 +53,10 @@ describe("[Sonic]", function(){
 
   });
 
+  /**
+  * Test query all sonic infos.
+  * No addition constraint.
+  */
   it("Query all sonics success", function(done){
     var options = {
       host: host,
@@ -62,6 +79,10 @@ describe("[Sonic]", function(){
 
   });
 
+  /**
+  * Insert new sonic info into database via web service.
+  * Create sonic object and send to server throuhg write method.
+  */
   it("Add new sonic successful", function(done){
     var options = {
       host: host,
