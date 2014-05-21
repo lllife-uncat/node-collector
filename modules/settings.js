@@ -11,5 +11,5 @@ var production = {
     port: process.env.OPENSHIFT_NODEJS_PORT || 8080
 };
 
-exports.configs = dev;
+// exports.configs = dev;
 exports.configs = production;

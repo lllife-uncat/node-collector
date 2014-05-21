@@ -25,7 +25,8 @@
   "dependencies": {
     "express": "~3.4.4",
     "restify": "~2.6.1",
-    "mongojs": "~0.10.0"
+    "mongojs": "~0.10.0",
+    "chai": "~1.9.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],
